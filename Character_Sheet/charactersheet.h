@@ -1,7 +1,8 @@
 #ifndef CHARACTERSHEET_H
 #define CHARACTERSHEET_H
-
+#include <QLabel>
 #include <QMainWindow>
+#include <QPicture>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CharacterSheet; }
@@ -17,5 +18,11 @@ public:
 
 private:
     Ui::CharacterSheet *ui;
+    void PressButton();
+    int points = 300;
+    int strength = 10;
+    int dexterity = 10;
+    int intelligence = 10;
+
 };
 #endif // CHARACTERSHEET_H
