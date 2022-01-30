@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>805</width>
-    <height>603</height>
+    <width>772</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>CharacterSheet</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>3</x>
+      <x>0</x>
       <y>0</y>
       <width>771</width>
       <height>454</height>
@@ -46,7 +46,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>resourec/GURPS_Logo.jpg</pixmap>
+            <pixmap>resource_image/GURPS_Logo.jpg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -88,6 +88,9 @@
              <height>30</height>
             </size>
            </property>
+           <property name="intValue" stdset="0">
+            <number>300</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -126,7 +129,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_strength"/>
+            <widget class="QLCDNumber" name="lcd_n_strength">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -188,7 +195,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_dexterity"/>
+            <widget class="QLCDNumber" name="lcd_n_dexterity">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -250,7 +261,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_intelligence"/>
+            <widget class="QLCDNumber" name="lcd_n_intelligence">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -312,7 +327,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_health"/>
+            <widget class="QLCDNumber" name="lcd_n_health">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -378,7 +397,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_hit_points"/>
+            <widget class="QLCDNumber" name="lcd_n_hit_points">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout">
@@ -396,7 +419,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushBb_hit_points_plusutton_10">
+              <widget class="QPushButton" name="b_hit_points_minus">
                <property name="maximumSize">
                 <size>
                  <width>30</width>
@@ -442,7 +465,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLCDNumber" name="lcd_n_will"/>
+              <widget class="QLCDNumber" name="lcd_n_will">
+               <property name="intValue" stdset="0">
+                <number>10</number>
+               </property>
+              </widget>
              </item>
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -504,7 +531,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLCDNumber" name="lcdNumber_7"/>
+              <widget class="QLCDNumber" name="lcdNumber_7">
+               <property name="intValue" stdset="0">
+                <number>10</number>
+               </property>
+              </widget>
              </item>
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -568,7 +599,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLCDNumber" name="lcd_n_fatigue_points"/>
+            <widget class="QLCDNumber" name="lcd_n_fatigue_points">
+             <property name="intValue" stdset="0">
+              <number>10</number>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -632,12 +667,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>805</width>
+     <width>772</width>
      <height>26</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
