@@ -26,4 +26,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     resource \
     resource_image/GURPS_Logo.jpg \
+    resource_image/GURPS_Logo.png \
     resourec/GURPS_Logo.jpg

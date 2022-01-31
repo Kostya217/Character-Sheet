@@ -23,7 +23,7 @@ public:
 
 private slots:
     void PressButton();
-    void FindCharacterSheet();
+    void OpenFile();
     void SaveFileAs();
 
 private:
@@ -34,8 +34,9 @@ private:
     int dexterity = 10;
     int intelligence = 10;
     int health = 10;
-    int hitPoints = 10;
-    int will = 10;
-    int fatiguePoints = 10;
+    int hitPoints = strength;
+    int will = intelligence;
+    int perception = intelligence;
+    int fatiguePoints = health;
 };
 #endif // CHARACTERSHEET_H
