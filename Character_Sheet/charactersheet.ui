@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>772</width>
-    <height>479</height>
+    <width>786</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>771</width>
-      <height>454</height>
+      <height>482</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -642,6 +642,31 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="b_dmg">
+         <property name="text">
+          <string>Удар</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="b_heal">
+         <property name="text">
+          <string>Хилл</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
         <widget class="QPushButton" name="b_import">
@@ -667,10 +692,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>772</width>
+     <width>786</width>
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Лист Персонажа</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
   </widget>
  </widget>
  <resources/>

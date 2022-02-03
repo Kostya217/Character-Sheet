@@ -8,10 +8,13 @@
 #include <QFileDialog>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "impactforce.h"
+#include "heal.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CharacterSheet; }
 QT_END_NAMESPACE
+
 
 class CharacterSheet : public QMainWindow
 {
@@ -20,14 +23,27 @@ class CharacterSheet : public QMainWindow
 public:
     CharacterSheet(QWidget *parent = nullptr);
     ~CharacterSheet();
+    int GetStrength();
+
+signals:
+    void sendStrenge(int strength);
+
+public slots:
+    void recieveHitPoints(int hitPoints);
 
 private slots:
     void PressButton();
     void OpenFile();
     void SaveFileAs();
+    void ShowImapactForce();
+    void pressHeal();
+
 
 private:
     Ui::CharacterSheet *ui;
+    ImpactForce *impactForce;
+    //Heal *heal;
+
     QFile fileJson;
     int points = 300;
     int strength = 10;

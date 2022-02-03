@@ -6,6 +6,11 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     , ui(new Ui::CharacterSheet)
 {
     ui->setupUi(this);
+
+    impactForce = new ImpactForce();
+
+    connect(ui->b_dmg, &QPushButton::clicked, this, &CharacterSheet::ShowImapactForce);
+
     QPixmap pixmap("D:\\Character-Sheet_NG_Courses_21\\Character_Sheet\\resource_image\\GURPS_Logo.png");
     ui->i_gurps_logo->setPixmap(pixmap);
 
@@ -46,6 +51,10 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     connect(ui->b_import, &QPushButton::clicked, this, &CharacterSheet::OpenFile);
 
     connect(ui->b_export, &QPushButton::clicked, this, &CharacterSheet::SaveFileAs);
+
+    connect(this, &CharacterSheet::sendStrenge, impactForce, &ImpactForce::recieveStrength);
+
+    connect(ui->b_heal, &QPushButton::clicked, this, &CharacterSheet::pressHeal);
 
 }
 
@@ -228,6 +237,7 @@ void CharacterSheet::OpenFile()
     ui->lcd_n_health->display(health = json["Health"].toInt());
     ui->lcd_n_hit_points->display(hitPoints = json["Hit Points"].toInt());
     ui->lcd_n_will->display(will = json["Will"].toInt());
+    ui->lcd_n_will->display(perception = json["Perception"].toInt());
     ui->lcd_n_fatigue_points->display(fatiguePoints = json["Fatigue Points"].toInt());
 }
 
@@ -251,6 +261,7 @@ void CharacterSheet::SaveFileAs()
     data.insert("Health", health);
     data.insert("Hit Points", hitPoints);
     data.insert("Will", will);
+    data.insert("Perception", perception);
     data.insert("Fatigue Points", fatiguePoints);
 
     fileJson.write(QJsonDocument(QJsonObject::fromVariantMap(data)).toJson());
@@ -258,5 +269,23 @@ void CharacterSheet::SaveFileAs()
     fileJson.close();
 
 
+}
+
+void CharacterSheet::ShowImapactForce()
+{
+    emit sendStrenge(strength);
+    impactForce->show();
+}
+
+void CharacterSheet::pressHeal()
+{
+    Heal *heal = new Heal();
+    heal->show();
+}
+
+void CharacterSheet::recieveHitPoints(int hitPoints)
+{
+    this->hitPoints += hitPoints;
+    ui->lcd_n_hit_points->display(this->hitPoints);
 }
 
