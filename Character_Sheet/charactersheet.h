@@ -42,7 +42,7 @@ private slots:
 private:
     Ui::CharacterSheet *ui;
     ImpactForce *impactForce;
-    //Heal *heal;
+    Heal *heal;
 
     QFile fileJson;
     int points = 300;

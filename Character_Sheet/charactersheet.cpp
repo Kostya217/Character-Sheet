@@ -8,8 +8,14 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     ui->setupUi(this);
 
     impactForce = new ImpactForce();
+    heal = new Heal();
 
     connect(ui->b_dmg, &QPushButton::clicked, this, &CharacterSheet::ShowImapactForce);
+
+    connect(ui->b_heal, &QPushButton::clicked, heal, &Heal::show);
+    connect(heal, &Heal::sendHitPoints, this, &CharacterSheet::recieveHitPoints);
+
+    connect(this, &CharacterSheet::sendStrenge, impactForce, &ImpactForce::recieveStrength);
 
     QPixmap pixmap("D:\\Character-Sheet_NG_Courses_21\\Character_Sheet\\resource_image\\GURPS_Logo.png");
     ui->i_gurps_logo->setPixmap(pixmap);
@@ -52,9 +58,9 @@ CharacterSheet::CharacterSheet(QWidget *parent)
 
     connect(ui->b_export, &QPushButton::clicked, this, &CharacterSheet::SaveFileAs);
 
-    connect(this, &CharacterSheet::sendStrenge, impactForce, &ImpactForce::recieveStrength);
 
-    connect(ui->b_heal, &QPushButton::clicked, this, &CharacterSheet::pressHeal);
+
+
 
 }
 

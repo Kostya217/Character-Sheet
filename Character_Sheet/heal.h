@@ -2,7 +2,9 @@
 #define HEAL_H
 
 #include <QMainWindow>
-#include <QErrorMessage>
+#include <QMessageBox>
+#include <QLineEdit>
+#include <QValidator>
 
 
 namespace Ui {

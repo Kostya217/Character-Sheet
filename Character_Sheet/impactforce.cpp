@@ -24,7 +24,6 @@ ImpactForce::ImpactForce(QWidget *parent) :
 
     connect(ui->b_thrust_dmg, &QPushButton::clicked, this, &ImpactForce::Thrust);
     connect(ui->b_swing_dmg, &QPushButton::clicked, this, &ImpactForce::Swing);
-    //connect(this, SIGNAL(sendDamage(int)), dmgOutput, SLOT(recieveDamage(int)));
     connect(this, &ImpactForce::sendDamage, dmgOutput, &DamageOutput::recieveDamage);
 }
 

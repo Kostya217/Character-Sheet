@@ -8,7 +8,7 @@ Heal::Heal(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->b_get_hit_points, &QPushButton::clicked, this, &Heal::pressButton);
-    //connect(this, &Heal::sendHitPoints, )
+
 }
 
 Heal::~Heal()
@@ -18,11 +18,17 @@ Heal::~Heal()
 
 void Heal::pressButton()
 {
-    try{
+    QIntValidator valid(0, 100, this);
+    QString input = ui->l_value_hp->text();
+    int pos = 0;
+
+    if(valid.validate(input, pos)){
         emit sendHitPoints(ui->l_value_hp->text().toInt());
         this->close();
-    }catch(QString){
-        (new QErrorMessage(this))->showMessage("Wrong Format");
+    }else{
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Wrong format used");
+        messageBox.setFixedSize(500,200);
     }
 
 }
