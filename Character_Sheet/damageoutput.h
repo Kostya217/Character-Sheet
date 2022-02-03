@@ -20,7 +20,7 @@ public:
 
 private:
     Ui::DamageOutput *ui;
-    int damage = 0;
+    int m_damage = 0;
 };
 
 #endif // DAMAGEOUTPUT_H

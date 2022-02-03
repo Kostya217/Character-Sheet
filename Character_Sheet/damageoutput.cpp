@@ -5,8 +5,8 @@
 
 void DamageOutput::recieveDamage(int damage)
 {
-    this->damage = damage;
-    ui->lcd_n_damage->display(this->damage);
+    this->m_damage = damage;
+    ui->lcd_n_damage->display(this->m_damage);
 }
 
 DamageOutput::DamageOutput(QWidget *parent) :

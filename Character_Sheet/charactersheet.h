@@ -23,7 +23,6 @@ class CharacterSheet : public QMainWindow
 public:
     CharacterSheet(QWidget *parent = nullptr);
     ~CharacterSheet();
-    int GetStrength();
 
 signals:
     void sendStrenge(int strength);
@@ -32,11 +31,12 @@ public slots:
     void recieveHitPoints(int hitPoints);
 
 private slots:
-    void PressButton();
-    void OpenFile();
-    void SaveFileAs();
-    void ShowImapactForce();
+    void pressButton();
+    void openFile();
+    void saveFileAs();
+    void showImapactForce();
     void pressHeal();
+    void rangeDamage();
 
 
 private:
@@ -45,14 +45,16 @@ private:
     Heal *heal;
 
     QFile fileJson;
-    int points = 300;
-    int strength = 10;
-    int dexterity = 10;
-    int intelligence = 10;
-    int health = 10;
-    int hitPoints = strength;
-    int will = intelligence;
-    int perception = intelligence;
-    int fatiguePoints = health;
+    int m_points = 200;
+    int m_strength = 10;
+    int m_dexterity = 10;
+    int m_intelligence = 10;
+    int m_health = 10;
+    int m_hit_points = m_strength;
+    int m_will = m_intelligence;
+    int m_perception = m_intelligence;
+    int m_fatiguePoints = m_health;
+//    int thrust =0;
+//    int swing = 0;
 };
 #endif // CHARACTERSHEET_H

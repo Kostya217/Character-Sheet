@@ -21,13 +21,15 @@ public:
     explicit ImpactForce(QWidget *parent = nullptr);
     ~ImpactForce();
 
-private:
-    Ui::ImpactForce *ui;
+private slots:
     void Thrust();
     void Swing();
     int GetCubeRoll(int numberForCubes);
-    int damage = 0;
-    int strength = 0;
+
+private:
+    Ui::ImpactForce *ui;
+    int m_damage = 0;
+    int m_strength = 0;
     QRandomGenerator *random;
     DamageOutput *dmgOutput;
 };
