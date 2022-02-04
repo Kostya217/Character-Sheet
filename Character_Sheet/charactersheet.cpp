@@ -554,7 +554,8 @@ void CharacterSheet::rangeDamage()
 
 void CharacterSheet::recieveHitPoints(int hitPoints)
 {
-    this->m_hit_points += hitPoints;
+
+    m_hit_points + hitPoints <= ceil(m_strength * 1.3) ? m_hit_points += hitPoints : m_hit_points = ceil(m_strength * 1.3) ;
     ui->lcd_n_hit_points->display(this->m_hit_points);
 }
 

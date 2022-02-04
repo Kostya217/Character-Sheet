@@ -17,7 +17,7 @@ Heal::~Heal()
 
 void Heal::pressButton()
 {
-    QIntValidator valid(0, 100, this);
+    QIntValidator valid(0, 1000, this);
     QString input = ui->l_value_hp->text();
     int pos = 0;
 
