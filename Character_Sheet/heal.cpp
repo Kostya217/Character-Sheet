@@ -8,7 +8,6 @@ Heal::Heal(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->b_get_hit_points, &QPushButton::clicked, this, &Heal::pressButton);
-
 }
 
 Heal::~Heal()

@@ -37,6 +37,12 @@ private slots:
     void showImapactForce();
     void pressHeal();
     void rangeDamage();
+    int logicsPlusButton(int characteristic, int deductingPoints);
+    int logicsDependentPlusButton(int dependentCharacteristic, int characteristic, int deductingPoints);
+    int logicsMinusButton(int characteristic, int addPoints);
+    int logicsDependentMinusButton(int dependentCharacteristic, int characteristic, int deductingPoints);
+    int logicWillOrPerceptionPlusButton(int characteristic, int deductingPoints);
+    int logicsWillOrPerceptionMinusButton(int characteristic, int addPoints);
 
 
 private:
@@ -54,7 +60,5 @@ private:
     int m_will = m_intelligence;
     int m_perception = m_intelligence;
     int m_fatiguePoints = m_health;
-//    int thrust =0;
-//    int swing = 0;
 };
 #endif // CHARACTERSHEET_H

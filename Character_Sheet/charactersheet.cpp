@@ -72,182 +72,154 @@ void CharacterSheet::pressButton()
 {
     QPushButton *button = (QPushButton*) sender();
 
-
     // Strenght
     if(button == ui->b_strength_plus){
-        if(m_strength >= 0 && m_points - 10 >= 0){
-            m_strength++;
-            m_hit_points++;
-            m_points -= 10;
-        }
+        m_hit_points = m_strength < logicsPlusButton(m_strength, 0)? logicsDependentPlusButton(m_hit_points, m_strength + 1, 0): m_hit_points;
+        m_strength = logicsPlusButton(m_strength, 10);
         rangeDamage();
-        ui->lcd_n_strength->display(m_strength);
-        ui->lcd_n_hit_points->display(m_hit_points);
-        ui->lcd_n_basic_lift->display(round((m_strength * m_strength)/5));
     }
     else if(button == ui->b_strength_minus){
-        if(m_strength > 0 && m_strength > 7){
-            m_strength--;
-            m_hit_points--;
-            m_points += 10;
-        }
+        m_hit_points = m_strength > logicsMinusButton(m_strength, 0) ? logicsDependentMinusButton(m_hit_points, m_strength + 2, 0): m_hit_points;
+        m_strength = logicsMinusButton(m_strength, 10);
         rangeDamage();
-        ui->lcd_n_strength->display(m_strength);
-        ui->lcd_n_hit_points->display(m_hit_points);
-        ui->lcd_n_basic_lift->display(round((m_strength * m_strength)/5));
     }
 
     // Dexterity
     else if(button == ui->b_dexterity_plus){
-        if(m_dexterity >= 0 && m_points - 10 >= 0){
-            m_dexterity++;
-            m_points -= 10;
-        }
-        ui->lcd_n_dexterity->display(m_dexterity);
+        m_dexterity = logicsPlusButton(m_dexterity, 10);
     }
     else if(button == ui->b_dexterity_minus){
-        if(m_dexterity > 0 && m_dexterity > 7){
-            m_dexterity--;
-            m_points += 10;
-        }
-        ui->lcd_n_dexterity->display(m_dexterity);
+        m_dexterity = logicsMinusButton(m_dexterity, 10);
     }
 
     // Intelligence
     else if(button == ui->b_intelligence_plus){
-        if(m_intelligence >= 0 && m_points - 20 >= 0){
-            m_intelligence++;
-
-
-            m_points -= 20;
-        }
-        if(m_will < 20 && m_will > 4){
-            m_will++;
-        }
-        if(m_perception < 20 && m_perception > 4){
-            m_perception++;
-        }
-        ui->lcd_n_will->display(m_will);
-        ui->lcd_n_perception->display(m_perception);
-        ui->lcd_n_intelligence->display(m_intelligence);
+        m_perception = m_intelligence < logicsPlusButton(m_intelligence, 0) ? logicWillOrPerceptionPlusButton(m_perception, 0): m_perception;
+        m_will = m_intelligence < logicsPlusButton(m_intelligence, 0) ? logicWillOrPerceptionPlusButton(m_will, 0): m_will;
+        m_intelligence = logicsPlusButton(m_intelligence, 20);
     }
     else if(button == ui->b_intelligence_minus){
-        if(m_intelligence > 0 && m_intelligence > 7){
-            m_intelligence--;
-            m_will--;
-            m_perception--;
-            m_points += 20;
-        }
-        if(m_will < 20 && m_will > 4){
-            m_will--;
-        }
-        if(m_perception < 20 && m_perception > 4){
-            m_perception++;
-        }
-        ui->lcd_n_will->display(m_will);
-        ui->lcd_n_perception->display(m_perception);
-        ui->lcd_n_intelligence->display(m_intelligence);
+        m_perception = m_intelligence > logicsMinusButton(m_intelligence, 0) ? logicsWillOrPerceptionMinusButton(m_perception, 0): m_perception;
+        m_will = m_intelligence > logicsMinusButton(m_intelligence, 0) ? logicsWillOrPerceptionMinusButton(m_will, 0): m_will;
+        m_intelligence = logicsMinusButton(m_intelligence, 20);
     }
 
     //Health
     else if(button == ui->b_health_plus){
-        if(m_health >= 0 && m_points - 20 >= 0){
-            m_health++;
-            m_fatiguePoints++;
-            m_points -= 20;
-        }
-        ui->lcd_n_fatigue_points->display(m_fatiguePoints);
-        ui->lcd_n_health->display(m_health);
+        m_health = logicsPlusButton(m_health, 10);
+        m_fatiguePoints = m_health < logicsPlusButton(m_health, 0) ? logicsDependentPlusButton(m_fatiguePoints, m_health + 1, 0): m_health;
     }
     else if(button == ui->b_health_minus){
-        if(m_health > 0 && m_health > 7){
-            m_health--;
-            m_fatiguePoints--;
-            m_points += 20;
-        }
-        ui->lcd_n_fatigue_points->display(m_fatiguePoints);
-        ui->lcd_n_health->display(m_health);
+        m_health = logicsMinusButton(m_health, 10);
+        m_fatiguePoints = m_health > logicsMinusButton(m_health, 0) ? logicsDependentMinusButton(m_fatiguePoints, m_health + 2, 0): m_health;
     }
 
     // Hit points
     else if(button == ui->b_hit_points_plus){
-        if( m_hit_points < ceil(m_strength * 1.3) &&
-            m_hit_points >= floor(m_strength - m_strength * 0.3)&&
-            m_points - 2 >= 0){
-
-            m_hit_points++;
-            m_points -= 2;
-        }
-        ui->lcd_n_hit_points->display(m_hit_points);
+        m_hit_points = logicsDependentPlusButton(m_hit_points, m_strength, 2);
     }
     else if(button == ui->b_hit_points_minus){
-        if(m_hit_points <= ceil(m_strength * 1.3) &&
-           m_hit_points > floor(m_strength - m_strength * 0.3)){
-            m_hit_points--;
-            m_points += 2;
-        }
-        ui->lcd_n_hit_points->display(m_hit_points);
+        m_hit_points = logicsDependentMinusButton(m_hit_points, m_strength, 2);
     }
 
     //Will
     else if(button == ui->b_will_plus){
-        if( m_will < 20 &&
-            m_will >= 4 &&
-            m_points - 5 >= 0){
-            m_will++;
-            m_points -= 5;
-        }
-        ui->lcd_n_will->display(m_will);
+        m_will = logicWillOrPerceptionPlusButton(m_will, 5);
     }
     else if(button == ui->b_will_minus){
-        if(m_will <= 20 &&
-           m_will > 4){
-            m_will--;
-            m_points += 5;
-        }
-        ui->lcd_n_will->display(m_will);
+        m_will = logicsWillOrPerceptionMinusButton(m_will, 5);
     }
 
     //Perception
     else if(button == ui->b_perception_plus){
-        if( m_perception < 20 &&
-            m_perception >= 4 &&
-            m_points - 5 >= 0){
-
-            m_perception++;
-            m_points -= 5;
-        }
-        ui->lcd_n_perception->display(m_perception);
+        m_perception = logicWillOrPerceptionPlusButton(m_perception, 5);
     }
     else if(button == ui->b_perception_minus){
-        if(m_perception <= 20 &&
-           m_perception > 4){
-            m_perception--;
-            m_points += 5;
-        }
-        ui->lcd_n_perception->display(m_perception);
+        m_perception = logicsWillOrPerceptionMinusButton(m_perception, 5);
     }
 
     // Fatigue points
     else if(button == ui->b_fatigue_points_plus){
-        if(m_fatiguePoints < ceil(m_health * 1.3) &&
-           m_fatiguePoints >= floor(m_health - m_health * 0.3)&&
-           m_points - 3 >= 0){
-            m_fatiguePoints++;
-            m_points -= 3;
-        }
-        ui->lcd_n_fatigue_points->display(m_fatiguePoints);
+        m_fatiguePoints = logicsDependentPlusButton(m_fatiguePoints, m_health, 3);
     }
     else if(button == ui->b_fatigue_points_minus){
-        if(m_fatiguePoints <= ceil(m_health * 1.3) &&
-           m_fatiguePoints > floor(m_health - m_health * 0.3)){
-            m_fatiguePoints--;
-            m_points += 3;
-        }
-        ui->lcd_n_fatigue_points->display(m_fatiguePoints);
+        m_fatiguePoints = logicsDependentMinusButton(m_fatiguePoints, m_health, 3);
+    }
+    ui->lcd_n_basic_lift->display(round((m_strength * m_strength)/5));
+    ui->lcd_n_strength->display(m_strength);
+    ui->lcd_n_dexterity->display(m_dexterity);
+    ui->lcd_n_intelligence->display(m_intelligence);
+    ui->lcd_n_health->display(m_health);
+    ui->lcd_n_hit_points->display(m_hit_points);
+    ui->lcd_n_will->display(m_will);
+    ui->lcd_n_perception->display(m_perception);
+    ui->lcd_n_fatigue_points->display(m_fatiguePoints);
+    ui->lcd_n_counter_points->display(m_points);
+}
+
+int CharacterSheet::logicsPlusButton(int characteristic, int deductingPoints)
+{
+    if(characteristic >= 7 && characteristic < 16 && m_points - deductingPoints >= 0){
+        characteristic++;
+        m_points -= deductingPoints;
     }
 
-    ui->lcd_n_counter_points->display(m_points);
+    return characteristic;
+}
+
+int CharacterSheet::logicsDependentPlusButton(int dependentCharacteristic, int characteristic, int deductingPoints)
+{
+    if(dependentCharacteristic < ceil(characteristic * 1.3) &&
+       dependentCharacteristic >= floor(characteristic * 0.7)&&
+       m_points - deductingPoints >= 0){
+        dependentCharacteristic++;
+        m_points -= deductingPoints;
+    }
+
+    return dependentCharacteristic;
+}
+
+
+int CharacterSheet::logicsMinusButton(int characteristic, int addPoints)
+{
+    if( characteristic <= 16 && characteristic > 7){
+        characteristic--;
+        m_points += addPoints;
+    }
+
+    return characteristic;
+}
+
+int CharacterSheet::logicsDependentMinusButton(int dependentCharacteristic, int characteristic, int deductingPoints)
+{
+    if(dependentCharacteristic > floor(characteristic * 0.7)){
+        dependentCharacteristic--;
+        m_points += deductingPoints;
+    }
+
+    return dependentCharacteristic;
+}
+
+int CharacterSheet::logicWillOrPerceptionPlusButton(int characteristic, int deductingPoints)
+{
+    if( characteristic < 20 &&
+        characteristic >= 4 &&
+        m_points - deductingPoints >= 0){
+        characteristic++;
+        m_points -= deductingPoints;
+    }
+
+    return characteristic;
+}
+
+int CharacterSheet::logicsWillOrPerceptionMinusButton(int characteristic, int addPoints)
+{
+    if(characteristic <= 20 &&
+       characteristic > 4){
+        characteristic--;
+        m_points += addPoints;
+    }
+    return characteristic;
 }
 
 void CharacterSheet::openFile()
@@ -275,6 +247,7 @@ void CharacterSheet::openFile()
     ui->lcd_n_will->display(m_will = json["Will"].toInt());
     ui->lcd_n_will->display(m_perception = json["Perception"].toInt());
     ui->lcd_n_fatigue_points->display(m_fatiguePoints = json["Fatigue Points"].toInt());
+    rangeDamage();
 }
 
 void CharacterSheet::saveFileAs()
@@ -578,8 +551,6 @@ void CharacterSheet::rangeDamage()
             break;
     }
 }
-
-
 
 void CharacterSheet::recieveHitPoints(int hitPoints)
 {
