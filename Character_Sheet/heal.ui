@@ -48,7 +48,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="l_text">
             <property name="text">
              <string>Введите количество жизней, которые хотите получить</string>
             </property>

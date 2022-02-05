@@ -13,7 +13,8 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     connect(ui->b_dmg, &QPushButton::clicked, this, &CharacterSheet::showImapactForce);
 
     connect(ui->b_heal, &QPushButton::clicked, heal, &Heal::show);
-    connect(heal, &Heal::sendHitPoints, this, &CharacterSheet::recieveHitPoints);
+    connect(heal, &Heal::sendCurrentHitPoints, this, &CharacterSheet::recieveCurrentHitPoints);
+
 
     connect(this, &CharacterSheet::sendStrenge, impactForce, &ImpactForce::recieveStrength);
 
@@ -38,9 +39,12 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     connect(ui->b_health_plus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
     connect(ui->b_health_minus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
 
-    ui->lcd_n_hit_points->display(m_hit_points);
+    ui->lcd_n_hit_points->display(m_hitPoints);
     connect(ui->b_hit_points_plus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
     connect(ui->b_hit_points_minus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
+
+    ui->lcd_n_current_hp->display(m_currentHP);
+    connect(ui->b_current_hp_minus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
 
     ui->lcd_n_will->display(m_will);
     connect(ui->b_will_plus, &QPushButton::clicked, this, &CharacterSheet::pressButton);
@@ -58,6 +62,8 @@ CharacterSheet::CharacterSheet(QWidget *parent)
     ui->l_thrust_range->setText("от (-1) до 4");
     ui->l_swing_range->setText("от 1 до 6");
 
+
+
     connect(ui->b_import, &QPushButton::clicked, this, &CharacterSheet::openFile);
 
     connect(ui->b_export, &QPushButton::clicked, this, &CharacterSheet::saveFileAs);
@@ -74,12 +80,12 @@ void CharacterSheet::pressButton()
 
     // Strenght
     if(button == ui->b_strength_plus){
-        m_hit_points = m_strength < logicsPlusButton(m_strength, 0)? logicsDependentPlusButton(m_hit_points, m_strength + 1, 0): m_hit_points;
+        m_hitPoints = m_strength < logicsPlusButton(m_strength, 0)? logicsDependentPlusButton(m_hitPoints, m_strength + 1, 0): m_hitPoints;
         m_strength = logicsPlusButton(m_strength, 10);
         rangeDamage();
     }
     else if(button == ui->b_strength_minus){
-        m_hit_points = m_strength > logicsMinusButton(m_strength, 0) ? logicsDependentMinusButton(m_hit_points, m_strength + 2, 0): m_hit_points;
+        m_hitPoints = m_strength > logicsMinusButton(m_strength, 0) ? logicsDependentMinusButton(m_hitPoints, m_strength + 2, 0): m_hitPoints;
         m_strength = logicsMinusButton(m_strength, 10);
         rangeDamage();
     }
@@ -116,10 +122,17 @@ void CharacterSheet::pressButton()
 
     // Hit points
     else if(button == ui->b_hit_points_plus){
-        m_hit_points = logicsDependentPlusButton(m_hit_points, m_strength, 2);
+        m_currentHP = m_hitPoints < logicsDependentPlusButton(m_hitPoints, m_strength, 0) ? m_currentHP + 1:  m_currentHP;
+        m_hitPoints = logicsDependentPlusButton(m_hitPoints, m_strength, 2);
+
     }
     else if(button == ui->b_hit_points_minus){
-        m_hit_points = logicsDependentMinusButton(m_hit_points, m_strength, 2);
+        m_currentHP = ((m_hitPoints > logicsDependentMinusButton(m_hitPoints, m_strength, 0)) && (m_currentHP > 0)) ? m_currentHP - 1:  m_currentHP;
+        m_hitPoints = logicsDependentMinusButton(m_hitPoints, m_strength, 2);
+    }
+    else if(button == ui->b_current_hp_minus && m_currentHP > 0){
+        m_currentHP--;
+        ui->lcd_n_current_hp->display(m_currentHP);
     }
 
     //Will
@@ -150,7 +163,8 @@ void CharacterSheet::pressButton()
     ui->lcd_n_dexterity->display(m_dexterity);
     ui->lcd_n_intelligence->display(m_intelligence);
     ui->lcd_n_health->display(m_health);
-    ui->lcd_n_hit_points->display(m_hit_points);
+    ui->lcd_n_hit_points->display(m_hitPoints);
+    ui->lcd_n_current_hp->display(m_currentHP);
     ui->lcd_n_will->display(m_will);
     ui->lcd_n_perception->display(m_perception);
     ui->lcd_n_fatigue_points->display(m_fatiguePoints);
@@ -226,9 +240,9 @@ void CharacterSheet::openFile()
 {
     QString value;
     QString fileName = QFileDialog::getOpenFileName(this,
-                                                              tr("Choose character sheet"),
-                                                              QDir::homePath(),
-                                                              tr("Sheet(*.chs);;All Files (*)"));
+                                                    tr("Choose character sheet"),
+                                                    QDir::homePath(),
+                                                    tr("Sheet(*.chs)"));
     fileJson.setFileName(fileName);
     fileJson.open(QIODevice::ReadOnly);
     value = fileJson.readAll();
@@ -243,7 +257,8 @@ void CharacterSheet::openFile()
     ui->lcd_n_dexterity->display(m_dexterity = json["Dexterity"].toInt());
     ui->lcd_n_intelligence->display(m_intelligence = json["Intelligence"].toInt());
     ui->lcd_n_health->display(m_health = json["Health"].toInt());
-    ui->lcd_n_hit_points->display(m_hit_points = json["Hit Points"].toInt());
+    ui->lcd_n_hit_points->display(m_hitPoints = json["Hit Points"].toInt());
+    ui->lcd_n_current_hp->display(m_currentHP = json["Current Hit Points"].toInt());
     ui->lcd_n_will->display(m_will = json["Will"].toInt());
     ui->lcd_n_will->display(m_perception = json["Perception"].toInt());
     ui->lcd_n_fatigue_points->display(m_fatiguePoints = json["Fatigue Points"].toInt());
@@ -268,7 +283,8 @@ void CharacterSheet::saveFileAs()
     data.insert("Dexterity", m_dexterity);
     data.insert("Intelligence", m_intelligence);
     data.insert("Health", m_health);
-    data.insert("Hit Points", m_hit_points);
+    data.insert("Hit Points", m_hitPoints);
+    data.insert("Current Hit Points", m_currentHP);
     data.insert("Will", m_will);
     data.insert("Perception", m_perception);
     data.insert("Fatigue Points", m_fatiguePoints);
@@ -284,12 +300,6 @@ void CharacterSheet::showImapactForce()
 {
     emit sendStrenge(m_strength);
     impactForce->show();
-}
-
-void CharacterSheet::pressHeal()
-{
-    Heal *heal = new Heal();
-    heal->show();
 }
 
 void CharacterSheet::rangeDamage()
@@ -552,10 +562,10 @@ void CharacterSheet::rangeDamage()
     }
 }
 
-void CharacterSheet::recieveHitPoints(int hitPoints)
+void CharacterSheet::recieveCurrentHitPoints(int hitPoints)
 {
 
-    m_hit_points + hitPoints <= ceil(m_strength * 1.3) ? m_hit_points += hitPoints : m_hit_points = ceil(m_strength * 1.3) ;
-    ui->lcd_n_hit_points->display(this->m_hit_points);
+    m_currentHP + hitPoints <=  m_hitPoints? m_currentHP += hitPoints : m_currentHP = m_hitPoints;
+    ui->lcd_n_current_hp->display(m_currentHP);
 }
 

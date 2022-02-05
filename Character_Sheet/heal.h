@@ -20,14 +20,16 @@ public:
     ~Heal();
 
 signals:
-    void sendHitPoints(int hitPoints);
-
+    void sendCurrentHitPoints(int hitPoints);
 
 private slots:
     void pressButton();
 
+
 private:
     Ui::Heal *ui;
+    int m_maxHP = 0;
+    int m_currentHP = 0;
 };
 
 #endif // HEAL_H

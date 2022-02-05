@@ -25,7 +25,7 @@ ImpactForce::ImpactForce(QWidget *parent) :
     connect(ui->b_thrust_dmg, &QPushButton::clicked, this, &ImpactForce::Thrust);
     connect(ui->b_swing_dmg, &QPushButton::clicked, this, &ImpactForce::Swing);
     connect(this, &ImpactForce::sendDamage, dmgOutput, &DamageOutput::recieveDamage);
-    connect(this, &ImpactForce::sendDamage, dmgOutput, &DamageOutput::recieveDamage);
+    //connect(this, &ImpactForce::sendDamage, dmgOutput, &DamageOutput::recieveDamage);
 }
 
 ImpactForce::~ImpactForce()
@@ -35,6 +35,7 @@ ImpactForce::~ImpactForce()
 
 void ImpactForce::Thrust()
 {
+    //qDebug() << m_strength;
     switch(m_strength){
         case 1:
         case 2:

@@ -28,14 +28,13 @@ signals:
     void sendStrenge(int strength);
 
 public slots:
-    void recieveHitPoints(int hitPoints);
+    void recieveCurrentHitPoints(int hitPoints);
 
 private slots:
     void pressButton();
     void openFile();
     void saveFileAs();
     void showImapactForce();
-    void pressHeal();
     void rangeDamage();
     int logicsPlusButton(int characteristic, int deductingPoints);
     int logicsDependentPlusButton(int dependentCharacteristic, int characteristic, int deductingPoints);
@@ -56,7 +55,8 @@ private:
     int m_dexterity = 10;
     int m_intelligence = 10;
     int m_health = 10;
-    int m_hit_points = m_strength;
+    int m_hitPoints = m_strength;
+    int m_currentHP = m_hitPoints;
     int m_will = m_intelligence;
     int m_perception = m_intelligence;
     int m_fatiguePoints = m_health;
