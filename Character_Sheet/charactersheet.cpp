@@ -305,37 +305,19 @@ void CharacterSheet::showImapactForce()
 void CharacterSheet::rangeDamage()
 {
     switch(m_strength){
-        case 1:
-        case 2:
-            ui->l_thrust_range->setText("от (-5) до 0");
-            ui->l_swing_range->setText("от (-4) до 1");
-            break;
-
-        case 3:
-        case 4:
-            ui->l_thrust_range->setText("от (-4) до 1");
-            ui->l_swing_range->setText("от (-3) до 2");
-            break;
-
-        case 5:
-        case 6:
-            ui->l_thrust_range->setText("от (-3) до 2");
-            ui->l_swing_range->setText("от (-2) до 3");
-            break;
-
         case 7:
         case 8:
-            ui->l_thrust_range->setText("от (-2) до 3");
-            ui->l_swing_range->setText("от (-1) до 4");
+            ui->l_thrust_range->setText("от 0 до 3");
+            ui->l_swing_range->setText("от 0 до 4");
              break;
 
         case 9:
-            ui->l_thrust_range->setText("от (-1) до 4");
+            ui->l_thrust_range->setText("от 0 до 4");
             ui->l_swing_range->setText("от 0 до 5");
             break;
 
         case 10:
-            ui->l_thrust_range->setText("от (-1) до 4");
+            ui->l_thrust_range->setText("от 0 до 4");
             ui->l_swing_range->setText("от 1 до 6");
             break;
 
@@ -364,200 +346,6 @@ void CharacterSheet::rangeDamage()
         case 16:
             ui->l_thrust_range->setText("от 2 до 7");
             ui->l_swing_range->setText("от 4 до 14");
-            break;
-
-        case 17:
-            ui->l_thrust_range->setText("от 3 до 8");
-            ui->l_swing_range->setText("от 2 до 17");
-            break;
-        case 18:
-            ui->l_thrust_range->setText("от 3 до 8");
-            ui->l_swing_range->setText("от 3 до 18");
-            break;
-
-        case 19:
-            ui->l_thrust_range->setText("от 1 до 11");
-            ui->l_swing_range->setText("от 4 до 19");
-            break;
-        case 20:
-            ui->l_thrust_range->setText("от 1 до 11");
-            ui->l_swing_range->setText("от 5 до 20");
-            break;
-
-        case 21:
-            ui->l_thrust_range->setText("от 2 до 12");
-            ui->l_swing_range->setText("от 3 до 23");
-            break;
-        case 22:
-            ui->l_thrust_range->setText("от 2 до 12");
-            ui->l_swing_range->setText("от 4 до 24");
-            break;
-
-        case 23:
-            ui->l_thrust_range->setText("от 3 до 13");
-            ui->l_swing_range->setText("от 5 до 25");
-            break;
-        case 24:
-            ui->l_thrust_range->setText("от 3 до 13");
-            ui->l_swing_range->setText("от 6 до 26");
-            break;
-
-        case 25:
-            ui->l_thrust_range->setText("от 4 до 14");
-            ui->l_swing_range->setText("от 4 до 29");
-            break;
-        case 26:
-            ui->l_thrust_range->setText("от 4 до 14");
-            ui->l_swing_range->setText("от 5 до 30");
-            break;
-
-        case 27:
-        case 28:
-            ui->l_thrust_range->setText("от 2 до 17");
-            ui->l_swing_range->setText("от 6 до 26");
-            break;
-
-        case 29:
-        case 30:
-            ui->l_thrust_range->setText("от 3 до 18");
-            ui->l_swing_range->setText("от 7 до 27");
-            break;
-
-        case 31:
-        case 32:
-            ui->l_thrust_range->setText("4 до 19");
-            ui->l_swing_range->setText("от 5 до 35");
-            break;
-
-        case 33:
-        case 34:
-            ui->l_thrust_range->setText("5 до 20");
-            ui->l_swing_range->setText("от 6 до 36");
-            break;
-
-        case 35:
-        case 36:
-            ui->l_thrust_range->setText("3 до 23");
-            ui->l_swing_range->setText("от 7 до 37");
-            break;
-
-        case 37:
-        case 38:
-            ui->l_thrust_range->setText("4 до 24");
-            ui->l_swing_range->setText("от 8 до 38");
-                break;
-
-        case 39:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-            ui->l_thrust_range->setText("5 до 25");
-            ui->l_swing_range->setText("от 6 до 41");
-            break;
-
-        case 45:
-        case 46:
-        case 47:
-        case 48:
-        case 49:
-            ui->l_thrust_range->setText("5 до 30");
-            ui->l_swing_range->setText("от 8 до 43");
-            break;
-
-        case 50:
-        case 51:
-        case 52:
-        case 53:
-        case 54:
-            ui->l_thrust_range->setText("7 до 32");
-            ui->l_swing_range->setText("от 7 до 47");
-            break;
-
-
-        case 55:
-        case 56:
-        case 57:
-        case 58:
-        case 59:
-            ui->l_thrust_range->setText("6 до 36");
-            ui->l_swing_range->setText("от 9 до 49");
-            break;
-
-        case 60:
-        case 61:
-        case 62:
-        case 63:
-        case 64:
-            ui->l_thrust_range->setText("6 до 41");
-            ui->l_swing_range->setText("от 9 до 54");
-            break;
-
-        case 65:
-        case 66:
-        case 67:
-        case 68:
-        case 69:
-            ui->l_thrust_range->setText("8 до 43");
-            ui->l_swing_range->setText("от 11 до 56");
-            break;
-        case 70:
-        case 71:
-        case 72:
-        case 73:
-        case 74:
-            ui->l_thrust_range->setText("8 до 48");
-            ui->l_swing_range->setText("от 10 до 60");
-            break;
-
-        case 75:
-        case 76:
-        case 77:
-        case 78:
-        case 79:
-            ui->l_thrust_range->setText("10 до 50");
-            ui->l_swing_range->setText("от 12 до 62");
-            break;
-
-        case 80:
-        case 81:
-        case 82:
-        case 83:
-        case 84:
-            ui->l_thrust_range->setText("9 до 54");
-            ui->l_swing_range->setText("от 11 до 66");
-            break;
-
-        case 85:
-        case 86:
-        case 87:
-        case 88:
-        case 89:
-            ui->l_thrust_range->setText("11 до 56");
-            ui->l_swing_range->setText("от 13 до 68");
-            break;
-
-        case 90:
-        case 91:
-        case 92:
-        case 93:
-        case 94:
-            ui->l_thrust_range->setText("10 до 60");
-            ui->l_swing_range->setText("от 12 до 72");
-            break;
-
-        case 95:
-        case 96:
-        case 97:
-        case 98:
-        case 99:
-            ui->l_thrust_range->setText("12 до 62");
-            ui->l_swing_range->setText("от 14 до 74");
-            break;
-        case 100:
-            ui->l_thrust_range->setText("от 11 до 66");
-            ui->l_swing_range->setText("от 13 до 78");
             break;
     }
 }
